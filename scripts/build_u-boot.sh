@@ -120,7 +120,7 @@ build_bsp_u-boot() {
         if [[ ${remote_url_exist} = "" || ${remote_url} != ${bsp_u_boot_url} ]]; then
             cd ../
             rm -rf $workdir/u-boot
-            git clone --depth=1 ${bsp_u_boot_url}
+            git clone --depth=1 ${bsp_u_boot_url} u-boot
             if [[ $? -eq 0 ]]; then
                 LOG "clone u-boot done."
             else
@@ -129,7 +129,7 @@ build_bsp_u-boot() {
             fi
         fi
     else
-        git clone --depth=1 ${bsp_u_boot_url}
+        git clone --depth=1 ${bsp_u_boot_url} u-boot
         LOG "clone u-boot done."
     fi
     cd $workdir/u-boot
@@ -181,6 +181,6 @@ if [ "x$config" == "xrk3588_defconfig" ];then
 else
     u_boot_ver="v2020.10"
     build_u-boot
-
+fi
 LOG "The u-boot.itb and idbloader.img are generated in the ${workdir}/u-boot."
 echo "u-boot" >> $workdir/.done
