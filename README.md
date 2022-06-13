@@ -2,7 +2,7 @@
 
 [English](./README.en.md) | 简体中文
 
-本仓库提供适用于 RK3399 开发板的 openEuler 镜像的构建脚本和相关文档。
+本仓库提供适用于 Rockchip 开发板的 openEuler 镜像的构建脚本和相关文档。
 
 - [Rockchip](#rockchip)
   - [文件说明](#文件说明)
@@ -214,13 +214,17 @@
 
         `sudo bash build.sh -n openEuler-21.09-RockPi-4A-aarch64-alpha1 -k https://gitee.com/openeuler/kernel.git -b openEuler-21.09 -c rock-pi-4-rk3399_defconfig -r https://gitee.com/src-openeuler/openEuler-repos/raw/openEuler-21.09/generic.repo -d rk3399-rock-pi-4a -s headless`
 
-3. ROC-RK3588S-PC
+适用的 RK3588 开发板:
+
+已经测试的开发板如下，其他类型 RK3588 开发板适用情况待测试。
+
+1. ROC-RK3588S-PC
 
     已测试的版本如下：
 
     - openEuler-22.03, 构建命令如下：
 
-        `sudo bash build.sh -n openEuler-22.03-LTS-ROC-RK3588S-PC-aarch64-alpha1 -k https://github.com/chainsx/kernel-rk3588.git -b main -c roc-rk3588s-pc_defconfig -r https://gitee.com/src-openeuler/openEuler-repos/raw/openEuler-22.03-LTS/generic.repo -d roc-rk3588s-pc -s headless`
+        `sudo bash build.sh -n openEuler-22.03-LTS-ROC-RK3588S-PC-aarch64-alpha1 -k https://github.com/chainsx/kernel-rk3588.git -b main -c rk3588_defconfig -r https://gitee.com/src-openeuler/openEuler-repos/raw/openEuler-22.03-LTS/generic.repo -d roc-rk3588s-pc -s headless`
 
 ### 顺序构建
 
