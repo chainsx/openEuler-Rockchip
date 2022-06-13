@@ -23,6 +23,7 @@ default_param() {
     branch=openEuler-20.03-LTS
     dtb_name=rk3399-firefly
     kernel_url="https://gitee.com/openeuler/rockchip-kernel.git"
+    bsp_kernel_url="https://github.com/chainsx/kernel-rk3588"
     boot_dir=$workdir/boot
     log_dir=$workdir/log
 }
@@ -101,7 +102,8 @@ set_cmdline(){
     echo "label openEuler
     kernel /${vmlinuz_name}
     fdt /${dtb_name}
-    append  earlyprintk console=ttyS2,1500000 rw root=$1 rootfstype=ext4 init=/sbin/init rootwait" > $2
+    append  earlyprintk console=ttyS2,1500000 rw root=$1 rootfstype=ext4 init=/sbin/init rootwait
+    initrd /initrd" > $2
 }
 
 clone_and_check_kernel_source() {
@@ -163,6 +165,13 @@ build_rockchip-kernel() {
     make ARCH=arm64 -j$(nproc)
 }
 
+build_bsp-kernel() {
+    cd kernel
+    make ARCH=arm64 roc-rk3588s-pc_defconfig
+    LOG "make kernel begin..."
+    make ARCH=arm64 -j$(nproc)
+}
+
 install_kernel() {
     if [ ! -f $workdir/kernel/arch/arm64/boot/Image ]; then
         ERROR "kernel Image can not be found!"
@@ -188,6 +197,7 @@ mk_boot() {
     else
         set_cmdline /dev/mmcblk1p5 ${boot_dir}/extlinux/extlinux.conf.sd
     fi
+    cp $workdir/../bin/initrd ${boot_dir}
 
     dd if=/dev/zero of=$workdir/boot.img bs=1M count=112 status=progress
     mkfs.vfat -n boot $workdir/boot.img
@@ -231,6 +241,8 @@ if [[ -f $workdir/kernel/arch/arm64/boot/dts/rockchip/${dtb_name}.dtb && -f $wor
 else
     if [ "x$branch" == "xopenEuler-20.03-LTS" ];then
         build_rockchip-kernel
+    elif [[ "x$dtb_name" == "xroc-rk3588s-pc" ]]; then
+        build_bsp-kernel
     else
         build_kernel
     fi
