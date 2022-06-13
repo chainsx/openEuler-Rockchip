@@ -214,6 +214,14 @@
 
         `sudo bash build.sh -n openEuler-21.09-RockPi-4A-aarch64-alpha1 -k https://gitee.com/openeuler/kernel.git -b openEuler-21.09 -c rock-pi-4-rk3399_defconfig -r https://gitee.com/src-openeuler/openEuler-repos/raw/openEuler-21.09/generic.repo -d rk3399-rock-pi-4a -s headless`
 
+3. ROC-RK3588S-PC
+
+    已测试的版本如下：
+
+    - openEuler-22.03, 构建命令如下：
+
+        `sudo bash build.sh -n openEuler-22.03-LTS-ROC-RK3588S-PC-aarch64-alpha1 -k https://github.com/chainsx/kernel-rk3588.git -b main -c roc-rk3588s-pc_defconfig -r https://gitee.com/src-openeuler/openEuler-repos/raw/openEuler-22.03-LTS/generic.repo -d roc-rk3588s-pc -s headless`
+
 ### 顺序构建
 
 依次执行脚本构建生成压缩后的 SD 卡启动镜像和打包后的 EMMC 刷写文件，过程参考[顺序构建](documents/顺序构建.md)。
