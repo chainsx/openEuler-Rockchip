@@ -162,10 +162,11 @@ EOF
     mkfs.ext4 -L rootfs ${rootp}
 
     cat << EOF | gdisk /dev/${loopX}
-    c
-    5
-    w
-    Y
+c
+5
+rootfs
+w
+Y
 EOF
 
     LOG "make filesystems done."
