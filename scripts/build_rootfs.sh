@@ -279,13 +279,6 @@ build_rootfs() {
     chkconfig expand-rootfs.sh on
 EOF
 
-    if [ "x$branch" == "xopenEuler-22.03-LTS" ]; then
-        echo "skip ntp setting."
-    else
-        sed -i 's/#NTP=/NTP=0.cn.pool.ntp.org/g' ${rootfs_dir}/etc/systemd/timesyncd.conf
-        sed -i 's/#FallbackNTP=/FallbackNTP=1.asia.pool.ntp.org 2.asia.pool.ntp.org/g' ${rootfs_dir}/etc/systemd/timesyncd.conf
-    fi
-
     echo "LABEL=rootfs  / ext4    defaults,noatime 0 0" > ${rootfs_dir}/etc/fstab
     echo "LABEL=boot  /boot vfat    defaults,noatime 0 0" >> ${rootfs_dir}/etc/fstab
     LOG "Set NTP and fstab done."

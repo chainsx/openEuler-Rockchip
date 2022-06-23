@@ -160,6 +160,14 @@ EOF
     
     mkfs.vfat -n boot ${bootp}
     mkfs.ext4 -L rootfs ${rootp}
+
+    cat << EOF | gdisk /dev/${loopX}
+    c
+    5
+    w
+    Y
+EOF
+
     LOG "make filesystems done."
     mkdir -p ${root_mnt} ${boot_mnt}
     mount -t vfat -o uid=root,gid=root,umask=0000 ${bootp} ${boot_mnt}

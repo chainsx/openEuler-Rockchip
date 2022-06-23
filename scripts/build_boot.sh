@@ -194,8 +194,6 @@ mk_boot() {
     mkdir -p ${boot_dir}/extlinux
     if [ "x$branch" == "xopenEuler-20.03-LTS" -a "x$dtb_name" == "xrk3399-rock-pi-4a" ]; then
         set_cmdline /dev/mmcblk0p5 ${boot_dir}/extlinux/extlinux.conf.sd
-    elif [[ "x$dtb_name" == "xroc-rk3588s-pc" ]]; then
-        set_cmdline /dev/mmcblk0p5 ${boot_dir}/extlinux/extlinux.conf
     else
         set_cmdline /dev/mmcblk1p5 ${boot_dir}/extlinux/extlinux.conf.sd
     fi
